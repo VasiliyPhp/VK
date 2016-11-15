@@ -316,7 +316,7 @@ class VK
             CURLOPT_POST => ($method == 'POST'),
             CURLOPT_POSTFIELDS => $postfields,
            CURLINFO_HEADER_OUT => 1,
-					 CURLOPT_SAFE_UPLOAD => false,
+					 // CURLOPT_SAFE_UPLOAD => false,
             CURLOPT_URL => $url
         ));
 				$res = curl_exec($this->ch);
