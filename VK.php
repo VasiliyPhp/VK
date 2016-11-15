@@ -231,14 +231,14 @@ class VK
 				throw new VKException($rs['error']['error_msg']);
 			}
 		  $result = array_merge($result, $rs['response']);
-			static $ii = 0;
-			if($ii>6){
-				return $result;
-			}
-			$ii++;
-			x([count($result), $total]);
-			flush();
-			ob_flush();
+			// static $ii = 0;
+			// if($ii>6){
+				// return $result;
+			// }
+			// $ii++;
+			// x([count($result), $total]);
+			// flush();
+			// ob_flush();
 			if(count($result)<$total){
 				usleep(250000);
 				$this->bulkApi($method, $params, $result, $total);
