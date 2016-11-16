@@ -199,12 +199,13 @@ class VK
     }
 
 		public function bulkApi($method, $params, &$result, $total = null){
-			
+			$old_count = count($result);
 			if($total === null){
 				$rs = $this->api($method, $params);
 				if(isset($rs["error"])){
-					throw new VKException($rs['error']['error_msg']);
+					throw new VKException($rs['error']['error_msg'] . ' - ' . print_r($params,1));
 				}
+				
 				$total = $rs['response']['count'];
 			}
 			$collected = count($result);
@@ -239,8 +240,8 @@ class VK
 			// x([count($result), $total]);
 			// flush();
 			// ob_flush();
-			if(count($result)<$total){
-				usleep(250000);
+			if( count($result) < $total && $old_count < count($result) ){
+				usleep(180000);
 				$this->bulkApi($method, $params, $result, $total);
 			}
 			// j($result);
